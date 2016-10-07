@@ -1,0 +1,8 @@
+What can we use culling for? 
+One application is to use a different shader for the front faces than for the back faces,i.e. for the outside and the inside of an object.
+
+Here is my understanding:
+Cull is totally different with 'discard'
+'Cull Front': the back faces are rendered with the shader1. 
+'Cull Back' : the front faces are rendered with the shader2.
+So we can use different shaders for the front faces than for the back faces

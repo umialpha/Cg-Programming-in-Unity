@@ -37,8 +37,14 @@
 		float4x4 modelMatrixInverse = unity_WorldToObject;
 		// multiplication with unity_Scale.w is unnecessary
 		// because we normalize transformed vectors
+		/**
+		for Normal Transformation
+		use:
+			mul(normal, WorldToObj )
+		see:http://www.lighthouse3d.com/tutorials/glsl-12-tutorial/the-normal-matrix/
+		**/
 		float4 p4 = mul(float4(input.normal, 0.0), modelMatrixInverse);
-		float3 p3 = float3(p4.x, p4.y, p4.z);
+		float3 p3 = float3(p4.xyz);
 		output.normal = normalize(p3);
 		output.viewDir = normalize(_WorldSpaceCameraPos
 			- float3(mul(modelMatrix, input.vertex).xyz));
@@ -51,7 +57,7 @@
 		float3 viewDirection = normalize(input.viewDir);
 		float dotAngle = abs(dot(viewDirection, normalDirection));
 		float newOpacity = min(1.0, _Color.a / dotAngle);
-		return float4(float3(_Color.xyz)*dotAngle, newOpacity);
+		return float4(float3(_Color.xyz) / dotAngle, newOpacity);
 	}
 		ENDCG
 	}

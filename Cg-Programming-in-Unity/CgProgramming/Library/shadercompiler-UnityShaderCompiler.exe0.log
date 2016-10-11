@@ -1,20 +1,16 @@
 Base path: C:/Program Files/Unity/Editor/Data
 Cmd: getPlatforms
 Cmd: preprocess
-  insize=999 outsize=1281 ok=1
+  insize=1015 outsize=1297 ok=1
 Cmd: preprocess
-  insize=999 outsize=1281 ok=1
+  insize=5695 outsize=870 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2755 outsize=2046 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2755 outsize=434 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=2677 outsize=1954 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=2677 outsize=434 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING ok=1
 Cmd: preprocess
-  insize=1519 outsize=468 ok=1
-Cmd: compileSnippet
-  api=4 type=0 insize=1348 outsize=490 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING ok=1
-Cmd: compileSnippet
-  api=4 type=1 insize=1348 outsize=298 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING ok=1
-Cmd: preprocess
-  insize=1520 outsize=469 ok=1
-Cmd: preprocess
-  insize=1588 outsize=469 ok=1
-Cmd: compileSnippet
-  api=4 type=0 insize=1416 outsize=490 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING ok=1
-Cmd: compileSnippet
-  api=4 type=1 insize=1416 outsize=366 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING ok=1
+  insize=5698 outsize=873 ok=1

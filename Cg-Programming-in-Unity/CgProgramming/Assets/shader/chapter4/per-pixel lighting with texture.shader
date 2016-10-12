@@ -4,7 +4,7 @@
 Shader "Cg per-pixel lighting with texture" {
 	Properties{
 		_MainTex("RGBA Texture For Material Color", 2D) = "white" {}
-	_Color("Diffuse Material Color", Color) = (1,1,1,1)
+		_Color("Diffuse Material Color", Color) = (1,1,1,1)
 		_SpecColor("Specular Material Color", Color) = (1,1,1,1)
 		_Shininess("Shininess", Float) = 10
 	}

@@ -82,6 +82,13 @@ Shader "Cg normal mapping" {
 			input.tangentWorld,
 			input.binormalWorld,
 			input.normalWorld);
+		/** local2WorldTranspose is the second parameter.
+			If we want to set it as the first parameter,
+			we should:
+				mul(local2WorldTransposeInverse, localCoords)
+			where:
+				local2WorldTransposeInverse = local2WorldMatrix
+		**/
 		float3 normalDirection =
 			normalize(mul(localCoords, local2WorldTranspose));
 

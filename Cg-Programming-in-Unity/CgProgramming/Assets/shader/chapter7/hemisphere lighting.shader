@@ -1,41 +1,65 @@
-﻿Shader "Custom/hemisphere lighting" {
-	Properties {
-		_Color ("Color", Color) = (1,1,1,1)
-		_MainTex ("Albedo (RGB)", 2D) = "white" {}
-		_Glossiness ("Smoothness", Range(0,1)) = 0.5
-		_Metallic ("Metallic", Range(0,1)) = 0.0
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+// Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
+
+Shader "Cg per-vertex hemisphere lighting" {
+	Properties{
+		_Color("Diffuse Material Color", Color) = (1,1,1,1)
+		_UpperHemisphereColor("Upper Hemisphere Color", Color)
+		= (1,1,1,1)
+		_LowerHemisphereColor("Lower Hemisphere Color", Color)
+		= (1,1,1,1)
+		_UpVector("Up Vector", Vector) = (0,1,0,0)
 	}
-	SubShader {
-		Tags { "RenderType"="Opaque" }
-		LOD 200
-		
+		SubShader{
+		Pass{
 		CGPROGRAM
-		// Physically based Standard lighting model, and enable shadows on all light types
-		#pragma surface surf Standard fullforwardshadows
 
-		// Use shader model 3.0 target, to get nicer looking lighting
-		#pragma target 3.0
+#pragma vertex vert  
+#pragma fragment frag 
 
-		sampler2D _MainTex;
+#include "UnityCG.cginc"
 
-		struct Input {
-			float2 uv_MainTex;
-		};
+		// shader properties specified by users
+		uniform float4 _Color;
+	uniform float4 _UpperHemisphereColor;
+	uniform float4 _LowerHemisphereColor;
+	uniform float4 _UpVector;
 
-		half _Glossiness;
-		half _Metallic;
-		fixed4 _Color;
+	struct vertexInput {
+		float4 vertex : POSITION;
+		float3 normal : NORMAL;
+	};
+	struct vertexOutput {
+		float4 pos : SV_POSITION;
+		float4 col : COLOR;
+		// the hemisphere lighting computed in the vertex shader
+	};
 
-		void surf (Input IN, inout SurfaceOutputStandard o) {
-			// Albedo comes from a texture tinted by color
-			fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
-			o.Albedo = c.rgb;
-			// Metallic and smoothness come from slider variables
-			o.Metallic = _Metallic;
-			o.Smoothness = _Glossiness;
-			o.Alpha = c.a;
-		}
+	vertexOutput vert(vertexInput input)
+	{
+		vertexOutput output;
+
+		float4x4 modelMatrix = unity_ObjectToWorld;
+		float4x4 modelMatrixInverse = unity_WorldToObject;
+
+		float3 normalDirection = normalize(
+			mul(float4(input.normal, 0.0), modelMatrixInverse).xyz);
+		float3 upDirection = normalize(_UpVector);
+
+		float w = 0.5 * (1.0 + dot(upDirection, normalDirection));
+		output.col = (w * _UpperHemisphereColor
+			+ (1.0 - w) * _LowerHemisphereColor) * _Color;
+
+		output.pos = mul(UNITY_MATRIX_MVP, input.vertex);
+		return output;
+	}
+
+	float4 frag(vertexOutput input) : COLOR
+	{
+		return input.col;
+	}
+
 		ENDCG
 	}
-	FallBack "Diffuse"
+	}
 }
